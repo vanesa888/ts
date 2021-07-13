@@ -6,8 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kuisioner extends Model
 {
-    protected $table = "kuis";
+    protected $table = "kuisioner";
     protected $primaryKey = "id";
     protected $fillable = [
-        'id', 'npm', 'nama', 'jeniskelamin', 'lahir', 'lahir_tgl', 'alamat', 'bekerja', 'alamatkan', 'notelp', 'kodeposkan', 'pertanyaan_id'];
+        'id','jawaban_id'];
+
+        public function kategori()
+        {
+            return $this->hasMany(Kategori::class);   
+        }
+        public function pertanyaan()
+        {
+            return $this->hasMany(Pertanyaan::class);   
+        }
+        public function jawaban()
+        {
+            return $this->hasMany(Jawaban::class);   
+        }
 }

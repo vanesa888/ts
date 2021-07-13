@@ -15,8 +15,12 @@ class Kategori extends Model
     {
     return $this->hasMany('App\Pertanyaan');   
     } 
-    public function Jawaban()
+    public function jawaban()
     {
-    return $this->hasMany(Jawaban::class);   
-    }        
+    return $this->hasMany('App\Jawaban');   
+    }      
+    public function kuisioner()
+    {
+    return $this->belongsTo(Kuisioner::class);   
+    }  
 }

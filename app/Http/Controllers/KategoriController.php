@@ -15,8 +15,9 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $dtKate = Kategori::All();
-        return view('Kategori.kategori', compact('dtKate'));
+        $dtKate = Kategori::with('pertanyaan')->get();
+        $dtTanya = Pertanyaan::All();
+        return view('Kategori.kategori', compact('dtKate', '$dtTanya'));
     }
 
     /**
@@ -46,13 +47,16 @@ class KategoriController extends Controller
    
     public function edit($id)
     {
-        //
+        $kt = Kategori::findorfail($id);
+        return view('Kategori.Edit', compact('kt'));
     }
 
    
     public function update(Request $request, $id)
     {
-        //
+        $kt = Kategori::findorfail($id);
+        $kt->update($request->all());
+        return redirect('kategori')->with('toast_success', 'Data Berhasil Update');
     }
 
    

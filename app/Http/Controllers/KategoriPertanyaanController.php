@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Hasil;
+use App\KategoriPertanyaan;
 
-class HasilController extends Controller
+class KategoriPertanyaanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class HasilController extends Controller
      */
     public function index()
     {
-        $dtHasil = Hasil::All();
-        return view('Kuisioner.kuissi', compact('dtHasil'));
+        $dtKate = KategoriPertanyaan::all();
+        return view('Kategori.kategori', compact('dtKate'));
     }
 
     /**
@@ -25,7 +25,7 @@ class HasilController extends Controller
      */
     public function create()
     {
-        //
+        return view('Kategori.datakate');
     }
 
     /**
@@ -36,14 +36,11 @@ class HasilController extends Controller
      */
     public function store(Request $request)
     {
-        Hasil::create([
-            'id'=> $request->id,
-            'user_id'=> $request->user_id,
-            'jawaban_id'=> $request->jawaban_id,
-
-            ]);
-
-            return redirect('kuissi');  
+        KategoriPertanyaan::create([
+            'id' => $request->id,
+            'kategoritanya' => $request->kategoritanya,
+        ]);
+        return redirect('kategori');
     }
 
     /**

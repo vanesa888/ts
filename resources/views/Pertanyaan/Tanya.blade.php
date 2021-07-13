@@ -50,15 +50,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <th>No</th>
             <th>Kategori</th>
             <th>Pertanyaan</th>
-            <th>keterangan</th>
+            <th>Aksi</th>
          </tr>
          @foreach ($dtTanya as $item)
          <tr>
             <td>{{$loop->iteration}}</td>
             <td>{{ $item->kategori->kategori}}</td>
             <td>{{ $item->nama}}</td>
-            <td><a href="#">Detail</a>
-                <a href="#">Edit</a></td>
+            <td><a href="{{route('Editper', $item->id)}}">Edit</a></td>
          </tr>
          @endforeach
          </table> 

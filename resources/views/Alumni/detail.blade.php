@@ -44,7 +44,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
          </div> 
 
        <div class="card-body">
-       {{$dtAlumni->iteration}} . <br>      
+      
                  <pre>
 
 Nama                : {{ $dtAlumni->nama }}
@@ -56,12 +56,12 @@ No Handphone        : {{ $dtAlumni->nohp }}
 Email               : {{ $dtAlumni->email }}
 Alamat Asal         : {{ $dtAlumni->alamat}}
 Alamat Terakhir     : {{ $dtAlumni->alamatT}}
-Pendidikan Terakhir : {{ $dtAlumni->alamat}}
+Pendidikan Terakhir : {{ $dtAlumni->peter}}
 Tahun Masuk         : {{ $dtAlumni->tmasuk }}
 Tahun Lulus         : {{ $dtAlumni->lulus }}
 Lama Studi          : {{ $dtAlumni->tlama}}
 ipk                 : {{ $dtAlumni->ipk }}
-Masa Tunggu         : {{ $dtAlumni->masatunggu_id }}
+Masa Tunggu         : {{ $dtAlumni->masatunggu_id}}
         </pre>
        </div>
     </div>

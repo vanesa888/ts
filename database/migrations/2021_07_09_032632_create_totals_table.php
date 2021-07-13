@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKesulitansTable extends Migration
+class CreateTotalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateKesulitansTable extends Migration
      */
     public function up()
     {
-        Schema::create('kesulitan', function (Blueprint $table) {
+        Schema::create('total', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->bigInteger('pertanyaan_id');
+            $table->bigInteger('jawaban_id');
+            $table->integer('jumlah');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateKesulitansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kesulitan');
+        Schema::dropIfExists('total');
     }
 }

@@ -55,8 +55,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
          <tr>
             <td>{{$loop->iteration}}</td>
             <td>{{ $item->kategori}}</td>
-            <td><a href="#">Detail</a>
-                <a href="#">Edit</a></td>
+            <td><a href="{{url('Edit', $item->id)}}">Edit</a></td>
          </tr>
          @endforeach
          </table> 

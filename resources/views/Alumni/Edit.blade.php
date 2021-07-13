@@ -34,11 +34,6 @@
        <form action="{{url('update-data', $Alm->id)}}" method="post">  
                {{ csrf_field() }}
            <div class="form-group">
-           <h6>NPM</h6>
-              <input type="text" id="npm" name="npm" class="form-control" placeholder="NPM" value="{{ $Alm->npm }}" oninvalid="this.setCustomValidity('Masukan NPM')"
-          oninput="this.setCustomValidity('')">
-           </div> 
-           <div class="form-group">
            <h6>Nama</h6>
               <input type="text" id="nama" name="nama" class="form-control" placeholder="Nama" value="{{ $Alm->nama }}" oninvalid="this.setCustomValidity('Masukan Nama')"
           oninput="this.setCustomValidity('')">
@@ -64,8 +59,11 @@
            </div> 
            <div class="form-group">
            <h6>Status Perkawinan</h6>
-              <input type="text" id="statusnikah" name="statusnikah" class="form-control" placeholder="Status Perkawinan" value="{{ $Alm->statusnikah }}" required oninvalid="this.setCustomValidity('Masukan Jenis Kelamin')"
-          oninput="this.setCustomValidity('')">
+           <select class="form-control" id="statusnikah" name="statusnikah" placeholder="Status Pernikahan" value="{{ $Alm->statusnikah }}" required>
+              <option hidden>Pilih</option>
+              <option>Sudah Menikah</option>
+              <option>Belum Menikah</option>
+           </select> 
            </div> 
            <div class="form-group">
            <h6>No Handphone</h6>
@@ -87,8 +85,12 @@
            </div> 
            <div class="form-group">
            <h6>Pendidikan Terakhir</h6>
-           <input type="text" id="peter" name="peter" class="form-control" placeholder="Pendidikan Terakhir" value="{{ $Alm->peter }}" required oninvalid="this.setCustomValidity('Masukan Jenis Kelamin')"
-          oninput="this.setCustomValidity('')"> 
+           <select class="form-control" id="peter" name="peter" placeholder="Pendidikan Terakhir" value="{{ $Alm->peter }}" required>
+              <option hidden>Pilih</option>
+              <option>S1</option>
+              <option>S2</option>
+              <option>S3</option>
+           </select> 
            </div> 
            <div class="form-group">
            <h6>Tahun Masuk</h6>
@@ -121,7 +123,7 @@
           oninput="this.setCustomValidity('')">
            </div>
            <div class="form-group">
-                    <label for="masatunggu_id" value="{{ $Alm->ipk }}" required> Berapa bulan waktu yang dihabiskan (sebelum dan sesudah kelulusan) untuk memeroleh pekerjaan pertama?</label>
+                    <label for="masatunggu_id" value="{{ $Alm->masatunggu_id }}" required> Berapa bulan waktu yang dihabiskan (sebelum dan sesudah kelulusan) untuk memeroleh pekerjaan pertama?</label>
                     <br>
                         <input type="radio" name="masatunggu_id" id="masatunggu_id" value="1">  > 1 Tahun 
                         <input type="radio" name="masatunggu_id" id="masatunggu_id" value="2">  6-12 Bulan   
@@ -129,12 +131,7 @@
                         <input type="radio" name="masatunggu_id" id="masatunggu_id" value="4">  3 bulan 
                         <input type="radio" name="masatunggu_id" id="masatunggu_id" value="5">  1-2 bulan          
               </div>
-           <div class="form-group">
-           <h6>No Telepon</h6>
-              <input type="text" id="notelp" name="notelp" class="form-control" placeholder="No Telepon" value="{{ $Alm->notelp }}" required oninvalid="this.setCustomValidity('Masukan Jenis Kelamin')"
-          oninput="this.setCustomValidity('')">
-           </div>
-           <div class="form-group">
+              <div class="form-group">
              <button type="submit" class="btn btn-success">Simpan Data</button>  
            </div>  
          </form>

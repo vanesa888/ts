@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDayasaingsTable extends Migration
+class CreatePertanyaanAlumnisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateDayasaingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('dayasaing', function (Blueprint $table) {
+        Schema::create('pertanyaan_alumni', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ class CreateDayasaingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dayasaing');
+        Schema::dropIfExists('pertanyaan_alumni');
     }
 }

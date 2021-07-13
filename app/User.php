@@ -22,12 +22,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function User()
+        public function Alumni()
     {
-        return $this->hasMany(User::class);   
-    }
-    public function Alumni()
-    {
-        return $this->hasMany(Alumni::class);   
+        return $this->hasOne(Alumni::class);   
     }
 }

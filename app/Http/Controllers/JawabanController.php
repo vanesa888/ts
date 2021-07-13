@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\jawaban;
+use App\Jawaban;
 use App\Pertanyaan;
 use App\Kategori;
+
 
 
 class JawabanController extends Controller
@@ -17,8 +18,8 @@ class JawabanController extends Controller
      */
     public function index()
     {
-        $dtJawaban = jawaban::all();
-        return view('Kuis.penilaian', compact('dtJawaban'));
+        $dtJawaban = Jawaban::all();
+        return view('Jawaban.formjaw', compact('dtJawaban'));
     }
 
     /**
@@ -43,9 +44,9 @@ class JawabanController extends Controller
     {
         Jawaban::create([
             'pertanyaan_id' => $request->pertanyaan_id,
-            'jawaban' => $request->jawaban,
+            'pilihjawab' => $request->pilihjawab,
             ]);
-            return redirect('frkuis'); 
+            return redirect('formjaw'); 
     }
 
     /**
@@ -56,7 +57,7 @@ class JawabanController extends Controller
      */
     public function show($id)
     {
-        //
+       //
     }
 
     /**
@@ -67,7 +68,8 @@ class JawabanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Jaw = Jawaban::findorfail($id);
+        return view('Jawaban.EditJaw', compact('Jaw'));
     }
 
     /**
@@ -79,7 +81,9 @@ class JawabanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Jaw = Jawaban::findorfail($id);
+        $Jaw->update($request->all());
+        return redirect('')->with('toast_success', 'Data Berhasil Update');
     }
 
     /**

@@ -46,7 +46,9 @@
               <td>  {{$loop->iteration}} . </td>
               <td>  {{ $item->nama }} </td> 
               <td> <a href="{{url('detail', $item->id)}}" class="btn btn-success">Detail</a>
+              @if (auth()->user()->level=="admin") 
         <a href="{{url('Edit', $item->id)}}" class="btn btn-success">Edit</a></td>
+              @endif
        </tr> 
         @endforeach
        </tabel> 

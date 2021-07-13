@@ -4,84 +4,164 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Kuisioner;
-
+use App\Pertanyaan;
+Use App\Kategori;
+use App\Jawaban;
+use App\Hasil;
+use App\Total;
 class kuisionerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+      public function index()
     {
-        $dtKuisioner = Kuisioner::all();
-        return view('Kuisioner.kuis', compact('dtKuisioner'));
+    
+        $dtJawaban = Jawaban::all();
+        $dtKate = Kategori::all();
+        $dtTanya = \App\Pertanyaan::with('kategori', 'jawaban')->get(); 
+        $dtKuis = Kuisioner::all();           
+        return view('Kuisioner.kuissi', compact( 'dtKuis','dtTanya', 'dtKate', 'dtJawaban', 'dtKuis'));
     }
-
+    
     public function hasil()
     {
         return view('Kuisioner.Hasil');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('Kuisioner.formkuis');
+        $dtTanya = Pertanyaan::all();
+        $dtJawaban = Jawaban::all();
+        return view('Kuisioner.dataKus', compact( 'dtTanya', 'dtJawaban'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        Kuisioner::create([
-            'npm' => $request->npm,
-            'nama' => $request->nama,
-            'pertanyaan_id'=> $request->pertanyaan_id,
-            ]);
+        // Kuisioner::create([
+        //     'id'=> $request->id,
+        //     'kategori_id'=> $request->kategori_id,
+        //     'pertanyaan_id'=> $request->pertanyaan_id,
+        //     'jawaban_id'=> $request->jawaban_id,
 
-            return redirect('formkuis');  
+        //     ]);
+
+        //     return redirect('kuissi');  
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        
+        $dtJawaban = Jawaban::all();
+        $dtTanya = Pertanyaan::findorfail($id);
+        return view('Kuisioner.EditKuis', compact('dtJawaban', 'dtTanya'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+       $hasil = Hasil::where([['user_id', '=', auth()->user()->id],
+       ['pertanyaan_id', '=', $id]])->first();
+        // dd($hasil);
+       if ($hasil ){
+            
+            $dt = [
+                'jawaban_id'=> $request->jawaban_id,
+            ];
+           
+            
+            $total = Total::where([['pertanyaan_id', '=', $id],
+            ['jawaban_id', '=', $hasil->jawaban_id]])->first();
+            // dd($total);
+            if($total){
+                if($total->jawaban_id != $request->jawaban_id){
+                    $tambah = new Total;
+                    $tambah->pertanyaan_id = $id;
+                    $tambah->jawaban_id = $request->jawaban_id;
+                    $tambah->jumlah =  1;
+                    $tambah->save();
+
+                    $dtKurang = [
+                        'jumlah' => $total->jumlah - 1,
+                    ];               
+                    $total->update($dtKurang);
+                }else{
+                    $total->jumlah = $total->jumlah + 1;
+                    $total->save();
+
+                    $dtKurang = [
+                        'jumlah' => $total->jumlah - 1,
+                    ];               
+                    $total->update($dtKurang);
+                }
+               
+
+                
+                
+            }else{
+               
+
+                $dtKurang = [
+                    'jumlah' => $total->jumlah - 1,
+                ];               
+                $total->update($dtKurang);
+
+            }
+    
+            $hasil->update($dt);
+
+       }else{
+        $total = Total::where([['pertanyaan_id', '=', $id],
+        ['jawaban_id', '=', $request->jawaban_id]])->first();
+        
+        if($total){
+            // dd("ada 2");
+            $dtKurang = [
+                'jumlah' => $total->jumlah + 1,
+            ];               
+            $total->update($dtKurang);
+        }else{
+            // dd("tidak ada 2");
+            Total::create([
+                'pertanyaan_id'=> $id,
+                'jawaban_id'=> $request->jawaban_id,
+                'jumlah' => 1
+            ]);
+        }
+            Hasil::create([
+                'user_id'=> auth()->user()->id,
+                'pertanyaan_id'=> $id,
+                'jawaban_id'=> $request->jawaban_id,
+            ]);
+
+       }
+        
+      
+        return redirect('kuissi')->with('toast_success', 'Kuis Berhasil Diisi');
+    }
+
+    public function showpilihan(){
+        $pertanyaan = Pertanyaan::all();
+        return view ('kuisioner.status', compact('pertanyaan'));
+    }
+    public function data(Request $request){
+        
+        
+        $tl =  Total::with('jawaban')->where('pertanyaan_id','=', $request->pilihan_id)->get();
+
+        $nama = [];
+        $data = [];
+
+        foreach ($tl as $hs){
+            $nama [] = $hs->jawaban->pilihjawab; 
+           }
+           
+        foreach ($tl as $l){
+            $data [] = $l->jumlah; 
+           }
+
+       return view('kuisioner.penghasilan',['nama'=>$nama,'data'=>$data]);
     }
 
     /**
@@ -92,6 +172,8 @@ class kuisionerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // $Jaw = Jawaban::findorfail($id);
+        // $Jaw->delete();
+        // return redirect('Kuisioner.kuissi')->with('toast_success', 'Kuis Berhasil Dihapus');
     }
 }

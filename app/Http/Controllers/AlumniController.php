@@ -4,55 +4,40 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Alumni;
+use App\User;
+use App\masatunggu;
 
 class alumniController extends Controller
 {
     
     public function index()
     {
-        $dtAlumni = Alumni::all();;
+        $dtAlumni = Alumni::all();        
         return view('Alumni.formdata', compact('dtAlumni'));
     }
 
-    public function cari(Request $request)
-	{
-		// menangkap data pencarian
-		$cari = $request->cari;
- 
-    		// mengambil data dari table pegawai sesuai pencarian data
-		$dtAlumni = Alumni::tabel('dtAlumni')
-		->where('pegawai_nama','like',"%".$cari."%")
-		->paginate();
- 
-    		// mengirim data pegawai ke view index
-		return view('Alumni.formdata',['dtAlumni' => $dtAlumni]);
- 
-	}
-
+    // public function index()
+    // {
+    //     $dtAlumni = Alumni::all();        
+    //     return view('Alumni.formdata', compact('dtAlumni'));
+    // }
+   
     public function indexx($id)
-    {
+    {   
+        $masa = masatunggu::all();
         $dtAlumni = Alumni::findorfail($id);
-        return view('Alumni.detail', compact('dtAlumni'));
+        return view('Alumni.detail', compact('dtAlumni', 'masa'));
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         return view('Alumni.data'); 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         Alumni::create([
+            'user_id' => auth()->user()->id,
             'nama' => $request->nama,
             'jeniskelamin' => $request->jeniskelamin,
             'lahir' => $request->lahir,
@@ -75,7 +60,7 @@ class alumniController extends Controller
    
     public function show($id)
     {
-        //
+        
     }
 
     public function edit($id)

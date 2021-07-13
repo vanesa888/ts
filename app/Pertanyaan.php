@@ -9,14 +9,24 @@ class Pertanyaan extends Model
     protected $table = "pertanyaan";
     protected $primaryKey = "id";
     protected $fillable = [
-        'id', 'kategori_id', 'nama'];
+        'id', 'kategoritanya_id', 'nama'];
 
     public function kategori()
     {
     return $this->belongsTo('App\Kategori', 'kategori_id');   
     }    
-    public function Jawaban()
+    public function jawaban()
     {
-    return $this->hasMany(Jawaban::class);   
-    }         
+    return $this->belongsTo(Jawaban::class);   
+    }  
+    
+    public function hasil()
+    {
+    return $this->hasMany(Hasil::class);   
+    }
+    public function total()
+    {
+    return $this->hasMany(Total::class);   
+    }
+
 }

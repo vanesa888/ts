@@ -156,12 +156,7 @@ class KuisController extends Controller
                ->groupBy('komunikasi_id')
                ->orderBy('komunikasi_id', 'asc')
                ->get();  
-    // $sm = $kom = jawaban::groupBy('1')
-    //            ->orderBy('1', 'asc')
-    //            ->get();
-    // $m = jawaban::where('jawabana','2')::count();
-    // $km = jawaban::where('jawaban','3')::count();
-    // $tm = jawaban::where('jawaban','4')->count();
+   
                
 
     $categories = [];
@@ -254,9 +249,6 @@ foreach ($Hubung as $ub){
    foreach ($komunik as $om){
     $mok [] = $om->nama; 
    }
-//    foreach ($pen as $en){
-//     $nep [] = $en->nama; 
-//    }
 
 
   foreach ($stt as $t){

@@ -46,23 +46,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
            <a href="{{route('jawaban')}}" class="btn btn-success">Tambah Data <i class="fas fa-plus-square"></i></a>  
          </div>
        </div> 
-
        <div class="card-body">
          <table class="table table-bordered">
          <tr>
             <th>No</th>
-            <th>Pertanyaan</th>
             <th>Jawaban</th>
             <th>Keterangan</th>
-            
          </tr>
          @foreach ($dtJawaban as $item)
          <tr>
-            <td>{{$loop->iteration}}</td>         
-            <td>{{ $item->pertanyaan-nama }}</td>
-            <td>{{ $item->jawaban }}</td>  
-            <td><a href="#">Detail</a>
-                <a href="#">Edit</a></td>
+            <td>{{$loop->iteration}}</td>
+            <td>{{ $item->pilihjawab }}</td>  
+            <td><a href="{{url('EditJaw', $item->id)}}">Edit</a></td>
          </tr>
          @endforeach
          </table>   

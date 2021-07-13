@@ -55,7 +55,11 @@
            </div> 
            <div class="form-group">
            <h6>Status Perkawinan</h6>
-              <input type="text" id="statusnikah" name="statusnikah" class="form-control" placeholder="Status Perkawinan">
+           <select class="form-control" id="statusnikah" name="statusnikah" placeholder="Status Perkawinan">
+              <option hidden>Pilih</option>
+              <option>Sudah Menikah</option>
+              <option>Belum Menikah</option>
+           </select> 
            </div> 
            <div class="form-group">
            <h6>No Handphone</h6>
@@ -75,7 +79,12 @@
            </div> 
            <div class="form-group">
            <h6>Pendidikan Terakhir</h6>
-           <input type="text" id="peter" name="peter" class="form-control" placeholder="Pendidikan Terakhir"> 
+           <select class="form-control" id="peter" name="peter" placeholder="Pendidikan Terakhir">
+              <option hidden>Pilih</option>
+              <option>S1</option>
+              <option>S2</option>
+              <option>S3</option>
+           </select> 
            </div> 
            <div class="form-group">
            <h6>Tahun Masuk</h6>

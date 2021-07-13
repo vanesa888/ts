@@ -15,9 +15,8 @@ class CreateJawabansTable extends Migration
     {
         Schema::create('jawaban', function (Blueprint $table) {
             $table->id();
-            $table->string('kategori_id');
-            $table->string('pertanyaan_id');
-            $table->string('jawaban');
+            $table->bigInteger('pertanyaan_id');
+            $table->string('pilihjawab');
             $table->timestamps();
         });
     }

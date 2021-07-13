@@ -24,13 +24,6 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                <li class="nav-item menu-open">
-            <a href="#" class="nav-link">
-              <i class="fas fa-user-graduate nav-icon"></i>
-              <p>
-                Alumni
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('formdata')}}" class="nav-link">
@@ -40,6 +33,7 @@
               </li>
               </ul>  
               <li class="nav-item">
+          @if (auth()->user()->level=="admin") 
           <li class="nav-item menu-open">
             <a href="#" class="nav-link">
               <i class="fas fa-file-alt nav-icon"></i>
@@ -48,16 +42,7 @@
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-          <ul class="nav nav-treeview">
-          @if (auth()->user()->level=="user")   
-          <li class="nav-item">
-              <a href="{{route('datakuis')}}" class="nav-link">
-                <i class="far fa-file-alt nav-icon"></i>
-                <p>Kuis</p>
-              </a>
-          </li> 
-          @endif     
-          @if (auth()->user()->level=="admin") 
+          <ul class="nav nav-treeview">  
           <li class="nav-item">
               <a href="{{route('kategori')}}" class="nav-link">
                 <i class="far fa-file-alt nav-icon"></i>
@@ -77,14 +62,22 @@
               </a>
           </li>          
           <li class="nav-item">
-              <a href="{{route('Hasilcopy')}}" class="nav-link">
+              <a href="{{route('status')}}" class="nav-link">
                 <i class="far fa-file-alt nav-icon"></i>
                 <p>Hasil</p>
               </a>
           </li>
-          @endif 
-          </li>
           </ul>
+          @endif 
+          @if (auth()->user()->level=="user")   
+          <li class="nav-item">
+              <a href="{{route('kuissi')}}" class="nav-link">
+                <i class="far fa-file-alt nav-icon"></i>
+                <p>Kuis</p>
+              </a>
+          </li> 
+          @endif   
+          </li>
           <li class="nav-item">
             <a href="{{route('logout')}}" class="nav-link">
             <i class="nav-icon fas fa-sign-out-alt"></i>

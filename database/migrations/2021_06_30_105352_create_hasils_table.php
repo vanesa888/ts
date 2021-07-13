@@ -15,8 +15,9 @@ class CreateHasilsTable extends Migration
     {
         Schema::create('hasil', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
-            $table->string('jawaban_id');
+            $table->bigInteger('user_id');
+            $table->bigInteger('pertanyaan_id');
+            $table->bigInteger('jawaban_id');
             $table->timestamps();
         });
     }

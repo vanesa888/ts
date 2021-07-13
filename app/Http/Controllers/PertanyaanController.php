@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pertanyaan;
 use App\Kategori;
+use App\Jawaban;
 
 class PertanyaanController extends Controller
 {
@@ -15,7 +16,8 @@ class PertanyaanController extends Controller
      */
     public function index()
     {
-       $dtTanya = Pertanyaan::all();
+       
+       $dtTanya = Pertanyaan::with('kategori','jawaban')->get();
         return view('Pertanyaan.Tanya', compact ('dtTanya'));
 
     }
@@ -29,8 +31,10 @@ class PertanyaanController extends Controller
     public function store(Request $request)
     {
         Pertanyaan::create([
+            'id' =>$request->id,
             'kategori_id' => $request->kategori_id,
             'nama' => $request->nama,
+            'jawaban_id' =>$request->jawaban_id,
             ]);
             return redirect('Tanya');
     }
@@ -55,7 +59,8 @@ class PertanyaanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pt = Pertanyaan::findorfail($id);
+        return view('Pertanyaan.Editper', compact('pt'));
     }
 
     /**
@@ -67,7 +72,9 @@ class PertanyaanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $pt = Pertanyaan::findorfail($id);
+         $pt->update($request->all());
+        return redirect('Tanya')->with('toast_success', 'Pertanyaan Berhasil'); 
     }
 
     /**
