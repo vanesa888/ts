@@ -60,7 +60,7 @@ class kuisionerController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
+    { 
        $hasil = Hasil::where([['user_id', '=', auth()->user()->id],
        ['pertanyaan_id', '=', $id]])->first();
         // dd($hasil);
@@ -95,12 +95,12 @@ class kuisionerController extends Controller
                     ];               
                     $total->update($dtKurang);
                 }
-               
+
 
                 
-                
+
             }else{
-               
+            
 
                 $dtKurang = [
                     'jumlah' => $total->jumlah - 1,
@@ -126,7 +126,7 @@ class kuisionerController extends Controller
             Total::create([
                 'pertanyaan_id'=> $id,
                 'jawaban_id'=> $request->jawaban_id,
-                'jumlah' => 1
+                'jumlah' => 1,
             ]);
         }
             Hasil::create([
@@ -137,7 +137,7 @@ class kuisionerController extends Controller
 
        }
         
-      
+        $total = Total::all();
         return redirect('kuissi')->with('toast_success', 'Kuis Berhasil Diisi');
     }
 

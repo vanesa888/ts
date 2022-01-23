@@ -48,14 +48,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <tr>
                       <th style="width: 1%;"><center>No</center></th>
                       <th><center>Pertanyaan</center></th>
-                      <th><center>Jawaban</center></th>
                       <th><center>Aksi</center></th>
                   </tr>
                   @foreach ($item->pertanyaan as $itemtanya)
                   <tr>  
                       <td> <center> {{$loop->iteration}} </center></td> 
                       <td>{{$itemtanya->nama}}</td> 
-                      <td>{{$itemtanya->jawaban["pilihjawab"]}}</td>
                       <td><a href="{{url('EditKuis', $itemtanya->id)}}">Edit </a> </td>
                   </tr>
                   @endforeach

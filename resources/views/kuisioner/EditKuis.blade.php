@@ -31,7 +31,7 @@
       <h3><center> Jawaban </center></h3>  
        <div class="card-body">
 
-       <form action="{{url('update-jaw', $dtTanya)}}" method="post">  
+       <form action="{{url('update-kuis', $dtTanya)}}" method="post">  
                {{ csrf_field() }}
            <div class="form-group"> 
            <div id="$dtTanya->id" class="card-header">{{$dtTanya->nama}}</div>  

@@ -42,6 +42,7 @@ Route::get('/Hasilcopy', 'KuisController@dataa')->name('Hasilcopy');
 Route::get('/penghasilan', 'kuisionerController@data')->name('penghasilan');
 Route::get('/status', 'kuisionerController@showpilihan')->name('status');
 
+
 route::get('/Edit/{id}', 'AlumniController@edit')->name('Edit');
 Route::post('/update-data/{id}', 'AlumniController@update')->name('update-data');
 
@@ -73,7 +74,7 @@ Route::get('/kuissi', 'KuisionerController@index')->name('kuissi');
 Route::post('/simpan-jawk', 'kuisionerController@store')->name('simpan-jawk');
 route::get('/dataKus', 'kuisionerController@create')->name('dataKus');
 route::get('/EditKuis/{id}', 'kuisionerController@edit')->name('EditKuis');
-Route::post('/update-jaw/{id}', 'kuisionerController@update')->name('update-jaw');
+Route::post('/update-kuis/{id}', 'kuisionerController@update')->name('update-kuis');
 Route::get('/delete-jawab/{id}', 'kuisionerController@destroy')->name('delete-jawab');
 
 

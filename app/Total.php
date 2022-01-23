@@ -9,7 +9,7 @@ class Total extends Model
     protected $table = "total";
     protected $primaryKey = "id";
     protected $fillable = [
-        'id', 'pertanyaan_id', 'jawaban_id', 'jumlah'];
+        'id', 'user_id', 'pertanyaan_id', 'jawaban_id', 'jumlah'];
 
         public function jawaban()
         {
@@ -19,4 +19,8 @@ class Total extends Model
         {
         return $this->belongsTo(Pertanyaan::class);   
         }
+        public function User()
+        {
+            return $this->belongsTo(User::class);   
+        } 
 }

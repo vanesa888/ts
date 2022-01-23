@@ -21,5 +21,9 @@ class Alumni extends Model
     {
        return $this->belongsTo(User::class);
     }  
+    public function total()
+        {
+        return $this->belongsTo(Pertanyaan::class);   
+        }
 }
 
